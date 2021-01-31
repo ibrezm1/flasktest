@@ -1,0 +1,15 @@
+# /etc/systemd/system/hello_app.service
+[Unit]
+Description=My WSGI app
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Environment=FLASK_APP=hello
+WorkingDirectory=/home/pi/projects/python/flasktest/src
+ExecStart=/home/pi/projects/python/flasktest/flvenv/bin/waitress-serve --listen=0.0.0.0:8000 hello:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
